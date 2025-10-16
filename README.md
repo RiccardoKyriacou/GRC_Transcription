@@ -2,8 +2,8 @@
 
 ### Overview
 
-#### This directory contains all code for the paper 
-#### "Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (in press)
+This directory contains all code for the paper 
+"Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (in press)
 ---
 
 ### Directory Summary
