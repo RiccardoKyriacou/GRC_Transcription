@@ -1,11 +1,13 @@
-# All code used for "Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (2025)
+# GitHub Repository for "Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (2025)
 
 ### Overview
-This directory contains all code for the paper 
-"Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (in press)
+
+#### This directory contains all code for the paper 
+#### "Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (in press)
 ---
 
 ### Directory Summary
+
 1. **01_RNAseq_Mapping** Scripts to align RNA-seq reads to the reference _B. coprophila_ genome using the STAR genome aligner and calculate Transcript-per-million (TPM) values using StringTie.  
 2. **02_Intergenic_mapping** Scripts to generate intergenic GFF, map reads to integrenic regions and caculate intergenic TPMs
 3. **03_Expressed_GRC_genes** Scripts to get expressed GRC-linked genes, BLAST GRC genes agaisnt core genes/genome, and BLAST these genes against NCBI non-redundant proteins database and repbase to perform homology analysis.  
