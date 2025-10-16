@@ -1,4 +1,4 @@
-## All code used for "Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (2025)
+# All code used for "Evidence for Transcription and Horizontal Gene Transfer in Dipteran Germline-Restricted Chromosomes" (2025)
 
 ### Overview
 This directory contains all code for the paper 
