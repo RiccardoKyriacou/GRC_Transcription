@@ -16,16 +16,17 @@
 ---
 
 ### Directory Structure
+
 GRC_transcription/
 ├── 01_RNAseq_Mapping/
-│   ├── 01_STAR_TPM_Nmax2
-│   ├── 02_get_TPM_values.py
-│   └── outputs/
-│       ├── combined_TPM_only.tsv
-│       ├── gene_overlap_0-4h_TPM.tsv
-│       ├── gene_overlap_4-8h_TPM.tsv
-│       ├── gene_overlap_adult_TPM.tsv
-│       └── gene_overlap_late-larva-early-pupa_TPM.tsv
+│ ├── 01_STAR_TPM_Nmax2
+│ ├── 02_get_TPM_values.py
+│ └── outputs/
+│ ├── combined_TPM_only.tsv
+│ ├── gene_overlap_0-4h_TPM.tsv
+│ ├── gene_overlap_4-8h_TPM.tsv
+│ ├── gene_overlap_adult_TPM.tsv
+│ └── gene_overlap_late-larva-early-pupa_TPM.tsv
 ├── 02_Intergenic_mapping/
 ├── 03_Expressed_GRC_genes/
 ├── 04_GRC2_HGT/
