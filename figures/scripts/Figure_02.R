@@ -119,14 +119,6 @@ plot_compare
 
 
 # ----- Plot 2) GRC expression uncorrected -----
-# Old way
-# GRC_counts_per_sample <- TPM_genes %>%
-#   filter(TPM > TPM_threshold, Chromosome %in% GRCs) %>%
-#   distinct(Gene, Stage, Chromosome) %>%
-#   group_by(Stage, Chromosome) %>%
-#   summarise(Num_genes = n(), .groups = "drop") %>%
-#   mutate(Chromosome = fct_relevel(Chromosome, GRCs))
-# GRC_counts_per_sample
 
 GRC_counts_per_sample <- TPM_genes %>%
   filter(TPM > TPM_threshold, Chromosome %in% GRCs) %>%     # Keep TPM > threshold
