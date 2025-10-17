@@ -1,4 +1,4 @@
-# Walkthrough for 01_STAR_TPM_Nmax.sh and 02_get_TPM_values.py
+# 1. RNAseq mapping code
 
 This script maps RNA reads from embryo, larval and adult data and maps it to the refernece _B. coprophila_ gneome and annotation 
 
