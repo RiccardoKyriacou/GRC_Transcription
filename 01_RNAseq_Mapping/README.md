@@ -66,3 +66,4 @@ Finally, we can pass the StringTie outputs directly to our custom script simply 
 ```
 python3 02_get_TPM_values.py -t .
 ```
+Outputs from 02_get_TPM_values.py can be found in /outputs/
