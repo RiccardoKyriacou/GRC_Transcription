@@ -87,3 +87,5 @@ Finally, we can pass the StringTie outputs directly to our custom script simply 
 python3 03_get_TPM_table.py -t .
 ```
 Outputs from 03_get_TPM_table.py can be found in /outputs/
+
+Average_TPM.R simply averages the TPM across all the GRC genes in this data set 
