@@ -25,7 +25,7 @@ STAR \
 --genomeDir idBraCopr2.1.primary.masked.fa.STAR \
 --genomeFastaFiles idBraCopr2.1.primary.masked.fa
 ```
-Then we map the reads to the genome using STAR, with filters to ensure proper read mapping
+Then we map the reads to the genome using STAR, with filters to ensure proper read mapping and providing the annotation to increase fidelity 
 ```
 for file in $(ls *_1.trimmed.fq.gz)
 do
