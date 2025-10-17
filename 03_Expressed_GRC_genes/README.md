@@ -1,6 +1,6 @@
 # 3. Generating expressed GRC data 
 
-For a GRC-linked gene to be considered expressed in this study, it must satisfy two conditions
+For a GRC-linked gene to be considered expressed in this study, it must satisfy a few conditions
 - Have an TPM > cutoff generated in /02_intergenic_TPM/ in at least 2 out of the three replicate libraries
 - Not see any such expression in somatic libraries
 - Not have a highly similar core-chromosome paralogue
