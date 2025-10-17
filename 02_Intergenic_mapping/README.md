@@ -4,6 +4,8 @@ First, we can use the following python script to generate intergenic GFF/GTF fil
 ```
 python3 01_get_intergenic_GFF3.py -g ../../Annotations/bcop_core_GRC.gff3 --min_distance 500 --min_length 1000 --max_length 20000
 ```
+Output (intergenic GFF and GTF) from 01_get_intergenic_GFF3.py can be fouind in /outputs/ 
+
 Then we can use 02_intergenic_TPM.sh, which runs StringTie on the uniquley mapped BAM files (generated in step 01), this time providing the intergenic gtf to calculate intergenic TPMs
 ```
 for file in $(ls *_uniquely_mapped.bam)
