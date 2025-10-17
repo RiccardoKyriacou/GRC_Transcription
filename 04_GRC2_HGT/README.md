@@ -1,4 +1,4 @@
-# 3. Generating expressed GRC data 
+# 4. HGT analysis
 
 Our homolgy analysis in 03_Expressed_GRC_genes revealed one gene, g19161, with clear bacterial origin. These scripts analyse the raw read libraries and identify a ~290kb bacterial region in GRC2, which may have evolved through HGT with endosymbiotic _Rickettsia_ 
 
