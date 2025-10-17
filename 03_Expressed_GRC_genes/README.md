@@ -75,7 +75,7 @@ python 03_get_BLAST_table.py -t GRC_gene_expression.tsv -c GRC_v_Core_gene_BLAST
 ```
 Our analysis now moves onto focusing on the confidently expressed GRC genes. 
 
-First, we use a python script to generate translated amino-acid seqiuences for downsteam homology analysis. It requires the path to the output of the previous step (outputs/GRC_BLAST_table.tsv) (-t), along with the reference genome (-g) and annoation (-a).
+First, we use a python script to generate translated amino-acid sequences for downsteam homology analysis. It requires the path to the output of the previous step (outputs/GRC_BLAST_table.tsv) (-t), along with the reference genome (-g) and annoation (-a).
 ```
 python 04_get_GRC_proteins.py -t GRC_BLAST_table.tsv -g ../Annotations/idBraCopr2.1.primary.masked.fa -a ../Annotations/bcop_core_GRC.gff3
 ```
