@@ -1,27 +1,8 @@
-# 01_STAR_TPM_Nmax.sh
-This script maps RNA reads from t
+# Walkthrough for 01_STAR_TPM_Nmax.sh and 02_get_TPM_values.py
 
-'''
-# Extract whole Embryo 0-4h: ME1, ME2, ME3, FE1, FE2, FE3
-mv \
-  $SCRATCH/X204SC21050493-Z01-F002/raw_data/ME{1,2,3}/*.fq.gz \
-  $SCRATCH/X204SC21050493-Z01-F002/raw_data/FE{1,2,3}/*.fq.gz \
-  $SCRATCH   
+This script maps RNA reads from embryo, larval and adult data and maps it to the refernece _B. coprophila_ gneome and annotation 
 
-# Extract whole Embryo 4-8h: ML1, ML2, ML3, FL1, FL2, FL3
-mv \
-  $SCRATCH/X204SC21050493-Z01-F002/raw_data/ML{1,2,3}/*.fq.gz \
-  $SCRATCH/X204SC21050493-Z01-F002/raw_data/FL{1,2,3}/*.fq.gz \
-  $SCRATCH  
-
-# Sync larval/pupal: Fgerm1, Fgerm2, Fgerm3, Fbody1, Fbody2, Fbody3, Mgerm1, Mgerm2, Mgerm3, Mbody1, Mbody2, Mbody3
-rsync -av \
-  /mnt/loki/ross/sequencing/raw/201908_Bradysia_coprophila_latelarval_earlypupa_Illumina_RNA/F*/*.fq.gz\
-  /mnt/loki/ross/sequencing/raw/201908_Bradysia_coprophila_latelarval_earlypupa_Illumina_RNA/M*/*.fq.gz\
-  $SCRATCH        
-'''
-  
-  
+First reads are trimmed (QC had been done prior to this study)
 ```
 echo "Trimming reads with fastp..."
 for file in $(ls *_1.fq.gz)
@@ -31,4 +12,57 @@ do
   	fastp -i ${base}_1.fq.gz -I ${base}_2.fq.gz -o ${base}_1.trimmed.fq.gz -O ${base}_2.trimmed.fq.gz && \
   	rm ${base}_1.fq.gz ${base}_2.fq.gz
 done
+```
+Next we index the _B. coprophila gneome_ using STAR 
+```
+echo "run genomeGenerate"
+STAR \
+--runThreadN 16 \
+--runMode genomeGenerate \
+--genomeSAindexNbases 12 \
+--outFileNamePrefix idBraCopr2.1.primary.masked.fa \
+--sjdbGTFfile idBraCopr2.1.primary.masked_core_and_grc_braker3.gff3  \
+--genomeDir idBraCopr2.1.primary.masked.fa.STAR \
+--genomeFastaFiles idBraCopr2.1.primary.masked.fa
+```
+Then we map the reads to the genome using STAR, with filters to ensure proper read mapping
+```
+for file in $(ls *_1.trimmed.fq.gz)
+do
+    base=$(basename "$file" "_1.trimmed.fq.gz")
+    echo "Aligning $base to B_coprophila genome"
+    STAR \
+        --runThreadN 16 \
+        --outSAMtype BAM SortedByCoordinate \
+        --readFilesCommand zcat \
+        --readFilesIn ${base}_1.trimmed.fq.gz ${base}_2.trimmed.fq.gz \
+        --outTmpDir ${base}.out \
+        --outFileNamePrefix ${base}.STAR. \
+        --outFilterMismatchNmax 2 \
+        --genomeDir idBraCopr2.1.primary.masked.fa.STAR
+done
+```
+Then we apply post-mapping filtering for uniquely mapped reads (MAPQ=255) and run StringTie
+```
+for file in $(ls *.bam)
+do
+    base=$(basename $file ".STAR.Aligned.sortedByCoord.out.bam")
+    output_file=${base}_uniquely_mapped.bam
+    echo "Filtering unique reads for $file"
+    samtools view -@ 16 -q 255 -b $file > $output_file
+done
+
+samtools index -M *_uniquely_mapped.bam
+
+for file in $(ls *_uniquely_mapped.bam)
+do
+    base=$(basename $file "_uniquely_mapped.bam")
+    output_file=${base}_unique_mapping_TPM.gtf
+    echo "Calculating TPM for $file"
+    stringtie -o $output_file -G idBraCopr2.1.primary.masked_core_and_grc_braker3.gff3  $file
+done
+```
+Finally, we can pass the StringTie outputs directly to our custom script simply by running
+```
+python3 02_get_TPM_values.py -t .
 ```
